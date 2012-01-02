@@ -1,0 +1,62 @@
+﻿=== CategoryTinymce ===
+Contributors: ypraise
+Donate link: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
+Tags: category description, wp_editor
+Requires at least: 3.3
+Tested up to: 3.3
+Stable tag: 1.0
+
+Provides the ability to add a fuly functional tinymce editor to the category editor to style up the introductory information for category archives.
+
+== Description ==
+
+This plugin needs at least Wordpress 3.3 to work as it uses the new wp_editor call introduced in WP 3.3.
+
+The CategoryTinymce plugin replaces the current category description box with one that has a fully active tinymce editor. 
+
+By adding html formated text in the category description you can spoil the look of the category admin page so this lugin also removes the description column from the admin page to keep it looking nice and manageable.
+
+There are no setting to configure just upload and  activate.
+
+
+
+== Installation ==
+
+1. Upload CategoryTinymce folder to the `/wp-content/plugins/` directory
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. Go to your category edit pages and start to style them up.
+
+
+== Frequently Asked Questions ==
+
+= What exactly does this plugin do to my Wordpress instalation =
+
+1. The plugin removes the default category description field.
+2. It then adds in a new field that is fully tinymce enabled. I did try and just add an editor to the default field but I could not get it to function cvorrectly. The new field saves to the same database section as the default field so no new database tables or fields are added.
+3. The plugin runs a filter on the category edit admin pages to remove the default description field as this broke up the admin table and made it unweildly.
+
+
+= The plugin does not work =
+
+The plugin in was tested on a clean install of wordpress 3.3 and a child theme of 2010. If the plugin does not work then raise a topic for this plugin and tell me: what version of wordpress you are using, what theme are you using, do you have problems with any other tinymce call in your theme.
+
+= What does the future hold for CategoryTinymce =
+
+There's a bit of tweaking needs doing but the main feature next is to only display the category description on the first page of the arhives so it is not repeated when you go to the next page in the archive.
+
+== Screenshots ==
+
+1. A new tinymce enabled category description box is added to the categroy edit screen.
+2. The category description box and column are removed form the admin page to keep it looking nice.
+
+
+== Changelog ==
+
+= 1.0 =
+* The first flavour launched.
+
+
+== Upgrade Notice ==
+
+= 1.0 =
+None

@@ -14,7 +14,7 @@ This plugin needs at least Wordpress 3.3 to work as it uses the new wp_editor ca
 
 The CategoryTinymce plugin replaces the current category description box with one that has a fully active tinymce editor. 
 
-By adding html formated text in the category description you can spoil the look of the category admin page so this lugin also removes the description column from the admin page to keep it looking nice and manageable.
+By adding html formated text in the category description you can spoil the look of the category admin page so this plugin also removes the description column from the admin page to keep it looking nice and manageable.
 
 There are no setting to configure just upload and  activate.
 

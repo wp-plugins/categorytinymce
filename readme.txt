@@ -6,7 +6,7 @@ Requires at least: 3.3
 Tested up to: 3.3.1
 Stable tag: 1.1
 
-Provides the ability to add a fuly functional tinymce editor to the category editor to style up the introductory information for category archives.
+Provides the ability to add a fuly functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
 == Description ==
 

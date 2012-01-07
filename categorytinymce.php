@@ -28,6 +28,7 @@ License: GPL
    
 	remove_filter( 'pre_term_description', 'wp_filter_kses' );
 	remove_filter( 'term_description', 'wp_kses_data' );
+
 	
 // lets add our new cat description box	
    
@@ -55,6 +56,32 @@ function description1($tag) {
 
 }
 
+// lets add our new tag description box	
+   
+define('description2', 'Tag_Description_option');
+add_filter('edit_tag_form_fields', 'description2');
+
+function description2($tag) {
+    $tag_extra_fields = get_option(description1);
+    ?>
+
+<table class="form-table">
+        <tr class="form-field">
+            <th scope="row" valign="top"><label for="description"><?php _ex('Description', 'Taxonomy Description'); ?></label></th>
+			<td>
+	<?php  
+	$settings = array('wpautop' => true, 'media_buttons' => true, 'quicktags' => true, 'textarea_rows' => '15', 'textarea_name' => 'description' );	
+	wp_editor(html_entity_decode($tag->description ), 'description2', $settings); ?>	
+	<br />
+	<span class="description"><?php _e('The description is not prominent by default, however some themes may show it.'); ?></span>
+	</td>	
+        </tr>
+     
+</table>
+    <?php
+
+}
+
 // quick jquery to hide the default cat description box
 
 function hide_category_description() {
@@ -69,9 +96,26 @@ jQuery(function($) {
  } 
 	  } 
 	  
+	  // quick jquery to hide the default tag description box
+
+function hide_tag_description() {
+      global $current_screen;
+if ( $current_screen->id == 'edit-post_tag' ) { 
+?>
+<script type="text/javascript">
+jQuery(function($) {
+ $('select#parent').closest('tr.form-field, div.form-field').hide(); $('textarea#description, textarea#tag-description').closest('tr.form-field, div.form-field').hide(); 
+ }); 
+ </script> <?php
+ } 
+	  } 
+	  
 // lets hide the cat description from the category admin page
 
 add_action('admin_head', 'hide_category_description'); 
+add_action('admin_head', 'hide_tag_description'); 
+
+
 
 
 function manage_my_category_columns($columns)
@@ -86,6 +130,19 @@ function manage_my_category_columns($columns)
  return $columns;
 }
 add_filter('manage_edit-category_columns','manage_my_category_columns');
+
+function manage_my_tag_columns($columns)
+{
+ // only edit the columns on the current taxonomy
+ if ( !isset($_GET['taxonomy']) || $_GET['taxonomy'] != 'post_tag' )
+ return $columns;
+ 
+ // unset the description columns
+ if ( $posts = $columns['description'] ){ unset($columns['description']); }
+ 
+ return $columns;
+}
+add_filter('manage_edit-post_tag_columns','manage_my_tag_columns');
 
 
 // when a category is removed delete the new box

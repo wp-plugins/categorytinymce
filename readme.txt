@@ -3,10 +3,10 @@ Contributors: ypraise
 Donate link: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Tags: category description, wp_editor
 Requires at least: 3.3
-Tested up to: 3.3
-Stable tag: 1.0
+Tested up to: 3.3.1
+Stable tag: 1.1
 
-Provides the ability to add a fully functional tinymce editor to the category editor to style up the introductory information for category archives.
+Provides the ability to add a fuly functional tinymce editor to the category editor to style up the introductory information for category archives.
 
 == Description ==
 
@@ -14,7 +14,9 @@ This plugin needs at least Wordpress 3.3 to work as it uses the new wp_editor ca
 
 The CategoryTinymce plugin replaces the current category description box with one that has a fully active tinymce editor. 
 
-By adding html formated text in the category description you can spoil the look of the category admin page so this plugin also removes the description column from the admin page to keep it looking nice and manageable.
+By adding html formated text in the category description you can spoil the look of the category admin page so this lugin also removes the description column from the admin page to keep it looking nice and manageable.
+
+The plugin has now been extended to include the tag description and admin screens.
 
 There are no setting to configure just upload and  activate.
 
@@ -42,7 +44,25 @@ The plugin in was tested on a clean install of wordpress 3.3 and a child theme o
 
 = What does the future hold for CategoryTinymce =
 
-There's a bit of tweaking needs doing but the main feature next is to only display the category description on the first page of the arhives so it is not repeated when you go to the next page in the archive.
+There's a bit of tweaking needs doing but the main feature next is to only display the category description on the first page of the arhives so it is not repeated when you go to the next page in the archive. In the mean time you can use the following code to deal with the issue.
+
+In category.php of your theme folder add:
+
+					if (is_category() && $paged < 2) {
+		echo '
+		<p>'.category_description().'</p>';
+	} 
+	
+	just before the get template part.
+	
+In tag.php of your theme folder add:
+
+if (is_tag() && $paged < 2) {
+		echo '
+		<p>'.tag_description().'</p>';
+	} 
+
+	just before the get template part.
 
 == Screenshots ==
 
@@ -52,11 +72,17 @@ There's a bit of tweaking needs doing but the main feature next is to only displ
 
 == Changelog ==
 
+= 1.1 =
+* extended the plugin to include tags as there's been no issues raised with the basic category description plugin.
+
 = 1.0 =
 * The first flavour launched.
 
 
 == Upgrade Notice ==
+
+= 1.1 =
+Upgrade if you want to use the plugin on tag descriptions and pages.
 
 = 1.0 =
 None

@@ -90,7 +90,7 @@ if ( $current_screen->id == 'edit-category' ) {
 ?>
 <script type="text/javascript">
 jQuery(function($) {
- $('select#parent').closest('tr.form-field, div.form-field').hide(); $('textarea#description, textarea#tag-description').closest('tr.form-field, div.form-field').hide(); 
+ $('select#parent').closest('tr.form-field').hide(); $('textarea#description, textarea#tag-description').closest('tr.form-field').hide(); 
  }); 
  </script> <?php
  } 
@@ -104,7 +104,7 @@ if ( $current_screen->id == 'edit-post_tag' ) {
 ?>
 <script type="text/javascript">
 jQuery(function($) {
- $('select#parent').closest('tr.form-field, div.form-field').hide(); $('textarea#description, textarea#tag-description').closest('tr.form-field, div.form-field').hide(); 
+ $('select#parent').closest('tr.form-field').hide(); $('textarea#description, textarea#tag-description').closest('tr.form-field').hide(); 
  }); 
  </script> <?php
  } 

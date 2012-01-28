@@ -4,9 +4,9 @@ Donate link: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Tags: category description, wp_editor
 Requires at least: 3.3
 Tested up to: 3.3.1
-Stable tag: 1.2
+Stable tag: 1.3
 
-Provides the ability to add a fully functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
+Provides the ability to add a fuly functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
 == Description ==
 
@@ -72,6 +72,9 @@ if (is_tag() && $paged < 2) {
 
 == Changelog ==
 
+= 1.3 =
+* forced a button style css width to correct the one button per row bug in html quicktags.
+
 = 1.2 =
 * dealt with the issue that prevented setting parent categories..
 
@@ -83,6 +86,9 @@ if (is_tag() && $paged < 2) {
 
 
 == Upgrade Notice ==
+
+= 1.3 = 
+Corrected a missing css stlye for buttons in html quicktags.
 
 = 1.2 =
 Upgrade if you need to be able to set parent categories on the category admin pages.

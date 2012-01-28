@@ -3,7 +3,7 @@
 Plugin Name: CategoryTinymce
 Plugin URI: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Description: Adds a tinymce enable box to the category descriptions page.
-Version: 1.2
+Version: 1.3
 Author: Kevin Heath
 Author URI: http://ypraise.com
 License: GPL
@@ -28,12 +28,23 @@ License: GPL
    
 	remove_filter( 'pre_term_description', 'wp_filter_kses' );
 	remove_filter( 'term_description', 'wp_kses_data' );
+	
+// add extra css to display quicktags correctly
+add_action( 'admin_print_styles', 'categorytinymce_admin_head' );
+
+
+function categorytinymce_admin_head() { ?>
+<style type="text/css">
+  .quicktags-toolbar input{width: 55px !important;}
+  </style>
+<?php	} 
 
 	
 // lets add our new cat description box	
    
 define('description1', 'Category_Description_option');
 add_filter('edit_category_form_fields', 'description1');
+
 
 function description1($tag) {
     $tag_extra_fields = get_option(description1);

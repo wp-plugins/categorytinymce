@@ -4,7 +4,7 @@ Donate link: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Tags: category description, wp_editor
 Requires at least: 3.3
 Tested up to: 3.3.1
-Stable tag: 1.3
+Stable tag: 1.4
 
 Provides the ability to add a fuly functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
@@ -72,6 +72,9 @@ if (is_tag() && $paged < 2) {
 
 == Changelog ==
 
+= 1.4 =
+* support for custom taxonomies - thanks to Jaime Martinez for adapting the taxonomy call line.
+
 = 1.3 =
 * forced a button style css width to correct the one button per row bug in html quicktags.
 
@@ -86,6 +89,9 @@ if (is_tag() && $paged < 2) {
 
 
 == Upgrade Notice ==
+
+= 1.4 =
+Support for custom taxonomies.
 
 = 1.3 = 
 Corrected a missing css stlye for buttons in html quicktags.

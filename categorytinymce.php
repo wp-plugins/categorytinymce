@@ -2,8 +2,8 @@
 /*
 Plugin Name: CategoryTinymce
 Plugin URI: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
-Description: Adds a tinymce enable box to the category descriptions page.
-Version: 1.3
+Description: Adds a tinymce enable box to the category descriptions and taxonomy page.
+Version: 1.4
 Author: Kevin Heath
 Author URI: http://ypraise.com
 License: GPL
@@ -111,7 +111,7 @@ jQuery(function($) {
 
 function hide_tag_description() {
       global $current_screen;
-if ( $current_screen->id == 'edit-post_tag' ) { 
+if ( $current_screen->id == 'edit-'.$current_screen->taxonomy ) {
 ?>
 <script type="text/javascript">
 jQuery(function($) {

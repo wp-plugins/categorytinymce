@@ -3,7 +3,7 @@ Contributors: ypraise
 Donate link: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Tags: category description, wp_editor
 Requires at least: 3.3
-Tested up to: 3.3.1
+Tested up to: 3.4.1
 Stable tag: 1.5
 Version 1.5
 

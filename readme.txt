@@ -57,12 +57,13 @@ In category.php of your theme folder add:
 	
 In tag.php of your theme folder add:
 
+
 if (is_tag() && $paged < 2) {
 		echo '
 		<p>'.tag_description().'</p>';
 	} 
 
-	just before the get template part.
+just before the get template part.
 
 == Screenshots ==
 

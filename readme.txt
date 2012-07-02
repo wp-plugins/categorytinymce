@@ -72,6 +72,9 @@ if (is_tag() && $paged < 2) {
 
 == Changelog ==
 
+= 1.5 =
+* tackled the parent category option bug and cleaned up some css code - thanks to Brightweb for fixes.
+
 = 1.4 =
 * support for custom taxonomies - thanks to Jaime Martinez for adapting the taxonomy call line.
 
@@ -89,6 +92,9 @@ if (is_tag() && $paged < 2) {
 
 
 == Upgrade Notice ==
+
+= 1.5 =
+tackled the parent category option bug and cleaned up some css code - thanks to Brightweb for fixes.
 
 = 1.4 =
 Support for custom taxonomies.

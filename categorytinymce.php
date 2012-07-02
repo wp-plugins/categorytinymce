@@ -3,7 +3,7 @@
 Plugin Name: CategoryTinymce
 Plugin URI: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Description: Adds a tinymce enable box to the category descriptions and taxonomy page.
-Version: 1.4
+Version: 1.5
 Author: Kevin Heath
 Author URI: http://ypraise.com
 License: GPL
@@ -35,7 +35,7 @@ add_action( 'admin_print_styles', 'categorytinymce_admin_head' );
 
 function categorytinymce_admin_head() { ?>
 <style type="text/css">
-  .quicktags-toolbar input{width: 55px !important;}
+  .quicktags-toolbar input{float:left !important; width:auto !important;}
   </style>
 <?php	} 
 
@@ -101,7 +101,7 @@ if ( $current_screen->id == 'edit-category' ) {
 ?>
 <script type="text/javascript">
 jQuery(function($) {
- $('select#parent').closest('tr.form-field').hide(); $('textarea#description, textarea#tag-description').closest('tr.form-field').hide(); 
+ $('select#description').closest('tr.form-field').hide(); $('textarea#description, textarea#tag-description').closest('tr.form-field').hide(); 
  }); 
  </script> <?php
  } 
@@ -115,7 +115,7 @@ if ( $current_screen->id == 'edit-'.$current_screen->taxonomy ) {
 ?>
 <script type="text/javascript">
 jQuery(function($) {
- $('select#parent').closest('tr.form-field').hide(); $('textarea#description, textarea#tag-description').closest('tr.form-field').hide(); 
+ $('select#description').closest('tr.form-field').hide(); $('textarea#description, textarea#tag-description').closest('tr.form-field').hide(); 
  }); 
  </script> <?php
  } 

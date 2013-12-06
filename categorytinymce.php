@@ -3,7 +3,7 @@
 Plugin Name: CategoryTinymce
 Plugin URI: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Description: Adds a tinymce enable box to the category descriptions and taxonomy page.
-Version: 1.5
+Version: 1.6
 Author: Kevin Heath
 Author URI: http://ypraise.com
 License: GPL
@@ -82,7 +82,7 @@ function description2($tag) {
 			<td>
 	<?php  
 	$settings = array('wpautop' => true, 'media_buttons' => true, 'quicktags' => true, 'textarea_rows' => '15', 'textarea_name' => 'description' );	
-	wp_editor(html_entity_decode($tag->description ), 'description2', $settings); ?>	
+	wp_editor(html_entity_decode($tag->description, ENT_QUOTES ), 'description2', $settings); ?>	
 	<br />
 	<span class="description"><?php _e('The description is not prominent by default, however some themes may show it.'); ?></span>
 	</td>	
@@ -155,7 +155,7 @@ function manage_my_tag_columns($columns)
 }
 add_filter('manage_edit-post_tag_columns','manage_my_tag_columns');
 
-
+add_filter('term_description', 'do_shortcode');
 // when a category is removed delete the new box
 
 add_filter('deleted_term_taxonomy', 'remove_Category_Extras');

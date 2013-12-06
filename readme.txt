@@ -3,9 +3,9 @@ Contributors: ypraise
 Donate link: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Tags: category description, wp_editor
 Requires at least: 3.3
-Tested up to: 3.4.1
-Stable tag: 1.5
-Version: 1.5
+Tested up to: 3.7.1
+Stable tag: 1.6
+Version: 1.6
 
 Provides the ability to add a fuly functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
@@ -74,6 +74,10 @@ just before the get template part.
 
 == Changelog ==
 
+= 1.6 =
+* added shortcode abilities - thanks to nikosnikos for suggested and code.
+* fixed issue with quote marks causing problems with rendering saved descriptions in some cases - thanks to BugTracker for fix.
+
 = 1.5 =
 * tackled the parent category option bug and cleaned up some css code - thanks to Brightweb for fixes.
 
@@ -94,6 +98,10 @@ just before the get template part.
 
 
 == Upgrade Notice ==
+
+= 1.6 =
+* added shortcode abilities - thanks to nikosnikos for suggested and code.
+* fixed issue with quote marks causing problems with rendering saved descriptions in some cases - thanks to BugTracker for fix.
 
 = 1.5 =
 tackled the parent category option bug and cleaned up some css code - thanks to Brightweb for fixes.

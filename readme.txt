@@ -3,11 +3,11 @@ Contributors: ypraise
 Donate link: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Tags: category description, wp_editor
 Requires at least: 3.3
-Tested up to: 3.7.1
-Stable tag: 1.6
-Version: 1.6
+Tested up to: 3.8
+Stable tag: 1.7
+Version: 1.7
 
-Provides the ability to add a fuly functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
+Provides the ability to add a fully functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
 == Description ==
 
@@ -15,7 +15,7 @@ This plugin needs at least Wordpress 3.3 to work as it uses the new wp_editor ca
 
 The CategoryTinymce plugin replaces the current category description box with one that has a fully active tinymce editor. 
 
-By adding html formated text in the category description you can spoil the look of the category admin page so this lugin also removes the description column from the admin page to keep it looking nice and manageable.
+By adding html formatted text in the category description you can spoil the look of the category admin page so this plugin also removes the description column from the admin page to keep it looking nice and manageable.
 
 The plugin has now been extended to include the tag description and admin screens.
 
@@ -32,10 +32,10 @@ There are no setting to configure just upload and  activate.
 
 == Frequently Asked Questions ==
 
-= What exactly does this plugin do to my Wordpress instalation =
+= What exactly does this plugin do to my Wordpress installation =
 
 1. The plugin removes the default category description field.
-2. It then adds in a new field that is fully tinymce enabled. I did try and just add an editor to the default field but I could not get it to function cvorrectly. The new field saves to the same database section as the default field so no new database tables or fields are added.
+2. It then adds in a new field that is fully tinymce enabled. I did try and just add an editor to the default field but I could not get it to function correctly. The new field saves to the same database section as the default field so no new database tables or fields are added.
 3. The plugin runs a filter on the category edit admin pages to remove the default description field as this broke up the admin table and made it unweildly.
 
 
@@ -45,7 +45,7 @@ The plugin in was tested on a clean install of wordpress 3.3 and a child theme o
 
 = What does the future hold for CategoryTinymce =
 
-There's a bit of tweaking needs doing but the main feature next is to only display the category description on the first page of the arhives so it is not repeated when you go to the next page in the archive. In the mean time you can use the following code to deal with the issue.
+There's a bit of tweaking needs doing but the main feature next is to only display the category description on the first page of the archives so it is not repeated when you go to the next page in the archive. In the mean time you can use the following code to deal with the issue.
 
 In category.php of your theme folder add:
 
@@ -68,11 +68,15 @@ just before the get template part.
 
 == Screenshots ==
 
-1. A new tinymce enabled category description box is added to the categroy edit screen.
+1. A new tinymce enabled category description box is added to the category edit screen.
 2. The category description box and column are removed form the admin page to keep it looking nice.
 
 
 == Changelog ==
+
+= 1.7 =
+* Added fix to stop description from deleting when saving with multiple empty paragraphs. Multiple empty paragraphs will be deleted on saving still but all the data will not be lost. If you want to increase spacing between paragraphs use css not empty paragraphs. 
+
 
 = 1.6 =
 * added shortcode abilities - thanks to nikosnikos for suggested and code.
@@ -98,6 +102,9 @@ just before the get template part.
 
 
 == Upgrade Notice ==
+
+= 1.7 =
+* Added fix to stop description from deleting when saving with multiple empty paragraphs. Multiple empty paragraphs will be deleted on saving still but all the data will not be lost. If you want to increase spacing between paragraphs use css not empty paragraphs. 
 
 = 1.6 =
 * added shortcode abilities - thanks to nikosnikos for suggested and code.

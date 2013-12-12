@@ -3,7 +3,7 @@
 Plugin Name: CategoryTinymce
 Plugin URI: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Description: Adds a tinymce enable box to the category descriptions and taxonomy page.
-Version: 1.7
+Version: 1.8
 Author: Kevin Heath
 Author URI: http://ypraise.com
 License: GPL
@@ -56,7 +56,7 @@ function description1($tag) {
 			<td>
 	<?php  
 	$settings = array('wpautop' => true, 'media_buttons' => true, 'quicktags' => true, 'textarea_rows' => '15', 'textarea_name' => 'description' );	
-		wp_editor(html_entity_decode($tag->description= str_replace('&nbsp;',' ',$tag->description) ), 'description1', $settings, ENT_QUOTES); ?>	
+		wp_editor(html_entity_decode($tag->description , ENT_QUOTES, 'UTF-8'), 'description1', $settings); ?>	
 	<br />
 	<span class="description"><?php _e('The description is not prominent by default, however some themes may show it.'); ?></span>
 	</td>	
@@ -82,7 +82,7 @@ function description2($tag) {
 			<td>
 	<?php  
 	$settings = array('wpautop' => true, 'media_buttons' => true, 'quicktags' => true, 'textarea_rows' => '15', 'textarea_name' => 'description' );	
-		wp_editor(html_entity_decode($tag->description= str_replace('&nbsp;',' ',$tag->description) ), 'description2', $settings, ENT_QUOTES ); ?>	
+	wp_editor(html_entity_decode($tag->description , ENT_QUOTES, 'UTF-8'), 'description2', $settings ); ?>	
 	<br />
 	<span class="description"><?php _e('The description is not prominent by default, however some themes may show it.'); ?></span>
 	</td>	

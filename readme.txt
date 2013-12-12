@@ -4,8 +4,8 @@ Donate link: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Tags: category description, wp_editor
 Requires at least: 3.3
 Tested up to: 3.8
-Stable tag: 1.7
-Version: 1.7
+Stable tag: 1.8
+Version: 1.8
 
 Provides the ability to add a fully functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
@@ -74,6 +74,9 @@ just before the get template part.
 
 == Changelog ==
 
+= 1.8 =
+* Better fix for loss of data which also allows for the saving of multiple paragraphs. I'd miss typed a fix provided by BugTracker earlier.
+
 = 1.7 =
 * Added fix to stop description from deleting when saving with multiple empty paragraphs. Multiple empty paragraphs will be deleted on saving still but all the data will not be lost. If you want to increase spacing between paragraphs use css not empty paragraphs. 
 
@@ -102,6 +105,9 @@ just before the get template part.
 
 
 == Upgrade Notice ==
+
+= 1.8 =
+* Better fix for loss of data which also allows for the saving of multiple paragraphs. I'd miss typed a fix provided by BugTracker earlier.
 
 = 1.7 =
 * Added fix to stop description from deleting when saving with multiple empty paragraphs. Multiple empty paragraphs will be deleted on saving still but all the data will not be lost. If you want to increase spacing between paragraphs use css not empty paragraphs. 

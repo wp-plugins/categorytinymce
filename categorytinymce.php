@@ -1,14 +1,14 @@
-<?php
+﻿<?php
 /*
 Plugin Name: CategoryTinymce
 Plugin URI: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Description: Adds a tinymce enable box to the category descriptions and taxonomy page.
-Version: 1.8
+Version: 2.0
 Author: Kevin Heath
 Author URI: http://ypraise.com
 License: GPL
 */
-/*  Copyright 2011  Kevin Heath  (email : kevin@ypraise.com)
+/*  Copyright 2013  Kevin Heath  (email : kevin@ypraise.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -23,11 +23,21 @@ License: GPL
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+/**
+ * Proper way to enqueue scripts and styles
+ */
+function theme_name_scripts() {
+	wp_enqueue_style( 'style',  get_bloginfo( 'stylesheet_url' ) );
+	}
+
+add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
+
 
 // lets remove the html filtering
    
 	remove_filter( 'pre_term_description', 'wp_filter_kses' );
 	remove_filter( 'term_description', 'wp_kses_data' );
+
 	
 // add extra css to display quicktags correctly
 add_action( 'admin_print_styles', 'categorytinymce_admin_head' );
@@ -66,6 +76,65 @@ function description1($tag) {
     <?php
 
 }
+
+//add extra fields to category edit form hook
+add_action ( 'edit_category_form_fields', 'extra_category_fields');
+//add extra fields to category edit form callback function
+function extra_category_fields( $tag ) {    //check for existing featured ID
+    $t_id = $tag->term_id;
+    $cat_meta = get_option( "category_$t_id");
+?>
+<table class="form-table">
+<tr class="form-field">
+<th scope="row" valign="top"><label for="bottomdescription"><?php _e('Bottom Description'); ?></label></th>
+<td>
+<?php  
+	$settings = array('wpautop' => true, 'media_buttons' => true, 'quicktags' => true, 'textarea_rows' => '15', 'textarea_name' => 'Cat_meta[bottomdescription]' );	
+		wp_editor(html_entity_decode($cat_meta['bottomdescription'] , ENT_QUOTES, 'UTF-8'), 'Cat_meta[bottomdescription]', $settings); ?>	
+	<br />
+
+
+            <span class="description"><?php _e('Bottom description'); ?></span><div style="both:clear;"></div>
+        </td>
+</tr>
+
+<tr></tr>
+<tr class="form-field">
+<th scope="row" valign="top"><label for="cat_Image_url"><?php _e('Category Image Url'); ?></label></th>
+<td>
+<input type="text" name="Cat_meta[img]" id="Cat_meta[img]" size="3" style="width:60%;" value="<?php echo $cat_meta['img'] ? $cat_meta['img'] : ''; ?>"><br />
+            <span class="description"><?php _e('Image for category: use full url with http://'); ?></span>
+        </td>
+</tr>
+</table>
+<?php
+}
+
+
+
+// save extra category extra fields hook
+add_action ( 'edited_category', 'save_extra_category_fileds');
+   // save extra category extra fields callback function
+function save_extra_category_fileds( $term_id ) {
+    if ( isset( $_POST['Cat_meta'] ) ) {
+        $t_id = $term_id;
+        $cat_meta = get_option( "category_$t_id");
+        $cat_keys = array_keys($_POST['Cat_meta']);
+            foreach ($cat_keys as $key){
+            if (isset($_POST['Cat_meta'][$key])){
+                $cat_meta[$key] = $_POST['Cat_meta'][$key];
+            }
+        }
+        //save the option array
+        update_option( "category_$t_id", $cat_meta );
+    }
+}
+
+
+
+
+
+
 
 // lets add our new tag description box	
    

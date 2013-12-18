@@ -4,8 +4,8 @@ Donate link: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Tags: category description, wp_editor
 Requires at least: 3.3
 Tested up to: 3.8
-Stable tag: 1.8
-Version: 1.8
+Stable tag: 2.0
+Version: 2.0
 
 Provides the ability to add a fully functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
@@ -21,6 +21,38 @@ The plugin has now been extended to include the tag description and admin screen
 
 There are no setting to configure just upload and  activate.
 
+You can now add a second category description at the bottom of the category listing. You need to add the following code to the category template file to get the description to display:
+
+<div class="botdesc">
+<?php
+if ( is_category() ) {
+ 
+$cat_id = get_query_var('cat');
+$cat_data = get_option("category_$cat_id");
+if (isset($cat_data['bottomdescription'])){
+echo $cat_data['bottomdescription'];
+}
+					} 
+
+?>
+</div>
+
+
+you can also set a category image and this is called in your template by:
+
+<div class="category_image">
+<?php
+$cat_id = get_query_var('cat');
+$cat_data = get_option("category_$cat_id");
+if (isset($cat_data['img'])){
+echo '<img src="'.$cat_data['img'].'">';
+}
+?>
+</div>
+
+The new options are based on code blogged by Ohad Raz at http://en.bainternet.info/
+
+In the new year I'll look at extending these new functions to tag pages.
 
 
 == Installation ==
@@ -66,6 +98,51 @@ if (is_tag() && $paged < 2) {
 
 just before the get template part.
 
+= How to display the description at the bottom of the category listings  =
+
+Add this to your template
+
+<div class="botdesc">
+<?php
+if ( is_category() ) {
+ 
+$cat_id = get_query_var('cat');
+$cat_data = get_option("category_$cat_id");
+if (isset($cat_data['bottomdescription'])){
+echo $cat_data['bottomdescription'];
+}
+					} 
+
+?>
+</div>
+
+
+= There's no styling for the bottom description  =
+
+Lots of themes will have different style for the category description style at the top. I don't know what your theme uses so the bottom description is enclosed in a div calls called botdesc
+
+You can either write up your own styles for the div class or find out what your theme is using to style the top category description and then simply add botdesc to include the bottom description.
+
+eg if your theme uses #header for the top description you add botdesc to the style.css as:
+
+#header, botdesc h1{blah blah blah}
+
+
+= How do I add the category image to my template? =
+
+add this to your theme file
+
+<div class="category_image">
+<?php
+$cat_id = get_query_var('cat');
+$cat_data = get_option("category_$cat_id");
+if (isset($cat_data['img'])){
+echo '<img src="'.$cat_data['img'].'">';
+}
+?>
+</div>
+
+
 == Screenshots ==
 
 1. A new tinymce enabled category description box is added to the category edit screen.
@@ -73,6 +150,11 @@ just before the get template part.
 
 
 == Changelog ==
+
+= 2.0 =
+* add ability to add a description to the bottom of the category listing. Evidently this is useful in ecommerce sites but I guess it can also help to add extra category specific information or advertising.
+* add ability to set a category image
+* to use both of the above you will need to add code to your template to display the output
 
 = 1.8 =
 * Better fix for loss of data which also allows for the saving of multiple paragraphs. I'd miss typed a fix provided by BugTracker earlier.
@@ -105,6 +187,11 @@ just before the get template part.
 
 
 == Upgrade Notice ==
+
+= 2.0 =
+* add ability to add a description to the bottom of the category listing. Evidently this is useful in ecommerce sites but I guess it can also help to add extra category specific information or advertising.
+* add ability to set a category image
+* to use both of the above you will need to add code to your template to display the output
 
 = 1.8 =
 * Better fix for loss of data which also allows for the saving of multiple paragraphs. I'd miss typed a fix provided by BugTracker earlier.

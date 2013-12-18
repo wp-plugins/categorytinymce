@@ -23,7 +23,7 @@ There are no setting to configure just upload and  activate.
 
 You can now add a second category description at the bottom of the category listing. You need to add the following code to the category template file to get the description to display:
 
-<div class="botdesc">
+`<div class="botdesc">
 <?php
 if ( is_category() ) {
  
@@ -35,11 +35,11 @@ echo $cat_data['bottomdescription'];
 					} 
 
 ?>
-</div>
+</div>`
 
 
 you can also set a category image and this is called in your template by:
-
+`
 <div class="category_image">
 <?php
 $cat_id = get_query_var('cat');
@@ -49,7 +49,7 @@ echo '<img src="'.$cat_data['img'].'">';
 }
 ?>
 </div>
-
+`
 The new options are based on code blogged by Ohad Raz at http://en.bainternet.info/
 
 In the new year I'll look at extending these new functions to tag pages.
@@ -80,28 +80,28 @@ The plugin in was tested on a clean install of wordpress 3.3 and a child theme o
 There's a bit of tweaking needs doing but the main feature next is to only display the category description on the first page of the archives so it is not repeated when you go to the next page in the archive. In the mean time you can use the following code to deal with the issue.
 
 In category.php of your theme folder add:
-
+`
 					if (is_category() && $paged < 2) {
 		echo '
 		<p>'.category_description().'</p>';
 	} 
-	
+`	
 	just before the get template part.
 	
 In tag.php of your theme folder add:
 
-
+`
 if (is_tag() && $paged < 2) {
 		echo '
 		<p>'.tag_description().'</p>';
 	} 
-
+`
 just before the get template part.
 
 = How to display the description at the bottom of the category listings  =
 
 Add this to your template
-
+`
 <div class="botdesc">
 <?php
 if ( is_category() ) {
@@ -115,7 +115,7 @@ echo $cat_data['bottomdescription'];
 
 ?>
 </div>
-
+`
 
 = There's no styling for the bottom description  =
 
@@ -131,7 +131,7 @@ eg if your theme uses #header for the top description you add botdesc to the sty
 = How do I add the category image to my template? =
 
 add this to your theme file
-
+`
 <div class="category_image">
 <?php
 $cat_id = get_query_var('cat');
@@ -141,7 +141,7 @@ echo '<img src="'.$cat_data['img'].'">';
 }
 ?>
 </div>
-
+`
 
 == Screenshots ==
 

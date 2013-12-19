@@ -1,9 +1,9 @@
-﻿<?php
+<?php
 /*
 Plugin Name: CategoryTinymce
 Plugin URI: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Description: Adds a tinymce enable box to the category descriptions and taxonomy page.
-Version: 2.0
+Version: 2.1
 Author: Kevin Heath
 Author URI: http://ypraise.com
 License: GPL
@@ -23,16 +23,6 @@ License: GPL
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-/**
- * Proper way to enqueue scripts and styles
- */
-function theme_name_scripts() {
-	wp_enqueue_style( 'style',  get_bloginfo( 'stylesheet_url' ) );
-	}
-
-add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
-
-
 // lets remove the html filtering
    
 	remove_filter( 'pre_term_description', 'wp_filter_kses' );
@@ -89,7 +79,7 @@ function extra_category_fields( $tag ) {    //check for existing featured ID
 <th scope="row" valign="top"><label for="bottomdescription"><?php _e('Bottom Description'); ?></label></th>
 <td>
 <?php  
-	$settings = array('wpautop' => true, 'media_buttons' => true, 'quicktags' => true, 'textarea_rows' => '15', 'textarea_name' => 'Cat_meta[bottomdescription]' );	
+	$settings = array('wpautop' => false, 'media_buttons' => true, 'quicktags' => true, 'textarea_rows' => '15', 'textarea_name' => 'Cat_meta[bottomdescription]' );	
 		wp_editor(html_entity_decode($cat_meta['bottomdescription'] , ENT_QUOTES, 'UTF-8'), 'Cat_meta[bottomdescription]', $settings); ?>	
 	<br />
 

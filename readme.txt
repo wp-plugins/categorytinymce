@@ -1,11 +1,11 @@
-﻿=== CategoryTinymce ===
+=== CategoryTinymce ===
 Contributors: ypraise
 Donate link: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Tags: category description, wp_editor
 Requires at least: 3.3
 Tested up to: 3.8
-Stable tag: 2.0
-Version: 2.0
+Stable tag: 1.8
+Version: 2.1
 
 Provides the ability to add a fully functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
@@ -30,9 +30,9 @@ if ( is_category() ) {
 $cat_id = get_query_var('cat');
 $cat_data = get_option("category_$cat_id");
 if (isset($cat_data['bottomdescription'])){
-echo $cat_data['bottomdescription'];
+echo do_shortcode($cat_data['bottomdescription']);
 }
-					} 
+                    } 
 
 ?>
 </div>
@@ -109,9 +109,9 @@ if ( is_category() ) {
 $cat_id = get_query_var('cat');
 $cat_data = get_option("category_$cat_id");
 if (isset($cat_data['bottomdescription'])){
-echo $cat_data['bottomdescription'];
+echo do_shortcode($cat_data['bottomdescription']);
 }
-					} 
+                    } 
 
 ?>
 </div>
@@ -151,6 +151,12 @@ echo '<img src="'.$cat_data['img'].'">';
 
 == Changelog ==
 
+= 2.1 =
+* Removed BOM from php file
+* Removed some rogue code I forget to take out after testing
+* Set wpautop to false to try and stop paragraphs and linebreaks being removed
+* Adapted call to second description code to allow for shortcodes
+
 = 2.0 =
 * add ability to add a description to the bottom of the category listing. Evidently this is useful in ecommerce sites but I guess it can also help to add extra category specific information or advertising.
 * add ability to set a category image
@@ -187,6 +193,12 @@ echo '<img src="'.$cat_data['img'].'">';
 
 
 == Upgrade Notice ==
+
+= 2.1 =
+* Removed BOM from php file
+* Removed some rogue code I forget to take out after testing
+* Set wpautop to false to try and stop paragraphs and linebreaks being removed
+* Adapted call to second description code to allow for shortcodes
 
 = 2.0 =
 * add ability to add a description to the bottom of the category listing. Evidently this is useful in ecommerce sites but I guess it can also help to add extra category specific information or advertising.

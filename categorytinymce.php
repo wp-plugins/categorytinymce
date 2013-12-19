@@ -3,7 +3,7 @@
 Plugin Name: CategoryTinymce
 Plugin URI: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Description: Adds a tinymce enable box to the category descriptions and taxonomy page.
-Version: 2.1
+Version: 2.2
 Author: Kevin Heath
 Author URI: http://ypraise.com
 License: GPL
@@ -109,10 +109,10 @@ function save_extra_category_fileds( $term_id ) {
     if ( isset( $_POST['Cat_meta'] ) ) {
         $t_id = $term_id;
         $cat_meta = get_option( "category_$t_id");
-        $cat_keys = array_keys($_POST['Cat_meta']);
+        $cat_keys = array_keys ($_POST['Cat_meta']);
             foreach ($cat_keys as $key){
             if (isset($_POST['Cat_meta'][$key])){
-                $cat_meta[$key] = $_POST['Cat_meta'][$key];
+                $cat_meta[$key] =stripslashes_deep($_POST['Cat_meta'][$key]);
             }
         }
         //save the option array

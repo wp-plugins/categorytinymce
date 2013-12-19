@@ -4,8 +4,8 @@ Donate link: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Tags: category description, wp_editor
 Requires at least: 3.3
 Tested up to: 3.8
-Stable tag: 2.1
-Version: 2.1
+Stable tag: 2.2
+Version: 2.2
 
 Provides the ability to add a fully functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
@@ -151,6 +151,9 @@ echo '<img src="'.$cat_data['img'].'">';
 
 == Changelog ==
 
+= 2.2 =
+* added wp stripslashes_deep function call to deal with some reports of auto escaping slashes causing problems with shortcode use
+
 = 2.1 =
 * Removed BOM from php file
 * Removed some rogue code I forget to take out after testing
@@ -193,6 +196,9 @@ echo '<img src="'.$cat_data['img'].'">';
 
 
 == Upgrade Notice ==
+
+= 2.2 =
+* added wp stripslashes_deep function call to deal with some reports of auto escaping slashes causing problems with shortcode use
 
 = 2.1 =
 * Removed BOM from php file

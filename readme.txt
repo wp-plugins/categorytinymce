@@ -4,8 +4,8 @@ Donate link: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Tags: category description, wp_editor
 Requires at least: 3.3
 Tested up to: 3.8
-Stable tag: 2.2
-Version: 2.2
+Stable tag: 2.3
+Version: 2.3
 
 Provides the ability to add a fully functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
@@ -143,6 +143,9 @@ echo '<img src="'.$cat_data['img'].'">';
 </div>
 `
 
+= The SEO parts do not work? =
+If you have an SEO plugin already installeed then that may override the SEO aspects of this plugin. I have All in One SEO pack installed and this over-rode the category title settings of this plugin. I've done a fix for this which may work with other SEO plugins. If you have the option of leaving category titles blank then do so. This will then allow for this plugin settings to write the title tags. If you have not completed the seo title for a category then this plugin will fill in with Category Name and Blog Name. Obviously you can keep your SEO plugin settings if you prefer. I added this feature because All in One SEO does not offer the option of SEO on category pages.
+
 == Screenshots ==
 
 1. A new tinymce enabled category description box is added to the category edit screen.
@@ -150,6 +153,9 @@ echo '<img src="'.$cat_data['img'].'">';
 
 
 == Changelog ==
+
+= 2.3 =
+* added seo meta options for categories
 
 = 2.2 =
 * added wp stripslashes_deep function call to deal with some reports of auto escaping slashes causing problems with shortcode use
@@ -196,6 +202,9 @@ echo '<img src="'.$cat_data['img'].'">';
 
 
 == Upgrade Notice ==
+
+= 2.3 =
+* added seo meta options for categories
 
 = 2.2 =
 * added wp stripslashes_deep function call to deal with some reports of auto escaping slashes causing problems with shortcode use

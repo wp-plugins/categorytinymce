@@ -3,7 +3,7 @@
 Plugin Name: CategoryTinymce
 Plugin URI: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Description: Adds a tinymce enable box to the category descriptions and taxonomy page.
-Version: 2.2
+Version: 2.3
 Author: Kevin Heath
 Author URI: http://ypraise.com
 License: GPL
@@ -96,6 +96,35 @@ function extra_category_fields( $tag ) {    //check for existing featured ID
             <span class="description"><?php _e('Image for category: use full url with http://'); ?></span>
         </td>
 </tr>
+
+<tr></tr>
+<tr class="form-field">
+<th scope="row" valign="top"><label for="seo_met_title"><?php _e('SEO Meta Title'); ?></label></th>
+<td>
+<input type="text" name="Cat_meta[seo_met_title]" id="Cat_meta[seo_met_title]" size="3" style="width:60%;" value="<?php echo $cat_meta['seo_met_title'] ? $cat_meta['seo_met_title'] : ''; ?>"><br />
+            <span class="description"><?php _e('Add title for head section. recommended 60 characters max'); ?></span>
+        </td>
+</tr>
+
+<tr></tr>
+<tr class="form-field">
+<th scope="row" valign="top"><label for="seo_met_keywords"><?php _e('SEO Meta Keywords'); ?></label></th>
+<td>
+<input type="text" name="Cat_meta[seo_met_keywords]" id="Cat_meta[seo_met_keywords]" size="3" style="width:60%;" value="<?php echo $cat_meta['seo_met_keywords'] ? $cat_meta['seo_met_keywords'] : ''; ?>"><br />
+            <span class="description"><?php _e('Add keywords for head section. separate with commas'); ?></span>
+        </td>
+</tr>
+
+<tr></tr>
+<tr class="form-field">
+<th scope="row" valign="top"><label for="seo_met_description"><?php _e('SEO Meta Description'); ?></label></th>
+<td>
+<textarea rows="4" name="Cat_meta[seo_met_description]" id="Cat_meta[seo_met_description]" size="3" style="width:60%;" ><?php echo $cat_meta['seo_met_description'] ? $cat_meta['seo_met_description'] : ''; ?></textarea><br />
+            <span class="description"><?php _e('Add description for head section. recommended 140 characters max'); ?></span>
+        </td>
+</tr>
+
+
 </table>
 <?php
 }
@@ -121,9 +150,66 @@ function save_extra_category_fileds( $term_id ) {
 }
 
 
+// lets add the meta to category head
+
+
+function add_seo_meta()
+ {  
+ 
+ if ( is_category() ) {
+ 
+$cat_id = get_query_var('cat');
+$cat_data = get_option("category_$cat_id");
+if (isset($cat_data['seo_met_description'])){           
+ 
+ ?>
+          <meta name="description" content="<?php echo $cat_data['seo_met_description']; ?>">
+       
+<?php
+	  }  
+
+
+if (isset($cat_data['seo_met_keywords'])){           
+ 
+ ?>
+          <meta name="keywords" content="<?php echo $cat_data['seo_met_keywords']; ?>">
+       
+<?php
+	  }  
 
 
 
+
+
+	  }   }
+add_action('wp_head', 'add_seo_meta');
+
+
+function add_cat_title()
+ {  
+ 
+ if ( is_category() ) {
+ $cat_id = get_query_var('cat');
+$cat_data = get_option("category_$cat_id");
+ 
+ if (isset($cat_data['seo_met_title'])){  
+
+ $title = $cat_data['seo_met_title']; 
+ 
+return $title;
+
+	  }
+	  else{
+	  $current_category = single_cat_title("", false); 
+	$title = $current_category .' | ' . get_bloginfo( "name", "display" ); 
+
+	  return $title;
+	  }
+ 
+ }}
+ 
+
+add_filter( 'wp_title', 'add_cat_title', 1000 );
 
 
 // lets add our new tag description box	

@@ -144,7 +144,7 @@ echo '<img src="'.$cat_data['img'].'">';
 `
 
 = The SEO parts do not work? =
-If you have an SEO plugin already installeed then that may override the SEO aspects of this plugin. I have All in One SEO pack installed and this over-rode the category title settings of this plugin. I've done a fix for this which may work with other SEO plugins. If you have the option of leaving category titles blank then do so. This will then allow for this plugin settings to write the title tags. If you have not completed the seo title for a category then this plugin will fill in with Category Name and Blog Name. Obviously you can keep your SEO plugin settings if you prefer. I added this feature because All in One SEO does not offer the option of SEO on category pages.
+If you have an SEO plugin already installed then that may override the SEO aspects of this plugin. For All in One SEO pack you can disable the overwriting by putting in the name of the category in the exclude pages of the settings. Take care and read the All in One instructions on using this feature so you know what you are disabling.
 
 == Screenshots ==
 

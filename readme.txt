@@ -5,7 +5,7 @@ Tags: category description, wp_editor
 Requires at least: 3.3
 Tested up to: 3.8
 Stable tag: 2.3
-Version: 2.3
+Version: 2.4
 
 Provides the ability to add a fully functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
@@ -154,6 +154,9 @@ If you have an SEO plugin already installed then that may override the SEO aspec
 
 == Changelog ==
 
+= 2.4 =
+* Fixed issue of losing titles on single pages
+
 = 2.3 =
 * added seo meta options for categories
 
@@ -202,6 +205,9 @@ If you have an SEO plugin already installed then that may override the SEO aspec
 
 
 == Upgrade Notice ==
+
+= 2.4 =
+* Fixed issue of losing titles on single pages
 
 = 2.3 =
 * added seo meta options for categories

@@ -4,8 +4,8 @@ Donate link: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Tags: category description, wp_editor
 Requires at least: 3.3
 Tested up to: 3.8
-Stable tag: 2.4
-Version: 2.4
+Stable tag: 3.0
+Version: 3.0
 
 Provides the ability to add a fully functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
@@ -52,7 +52,34 @@ echo '<img src="'.$cat_data['img'].'">';
 `
 The new options are based on code blogged by Ohad Raz at http://en.bainternet.info/
 
-In the new year I'll look at extending these new functions to tag pages.
+You can add a bottom description to your tag pages using the following code in your template:
+
+`
+<div class="bottagdesc">
+<?php
+if ( is_tag() ) {
+$tag_data = get_option("tag_$tag_id");
+if (isset($tag_data['bottomdescription'])){
+echo do_shortcode($tag_data['bottomdescription']);
+}
+                    } 
+
+?>
+</div>
+`
+
+You can call the tag image in your template by using:
+
+`
+<div class="tag_image">
+<?php
+$tag_data = get_option("tag_$tag_id");
+if (isset($tag_data['img'])){
+echo '<img src="'.$tag_data['img'].'">';
+}
+?>
+</div>
+`
 
 
 == Installation ==
@@ -116,10 +143,29 @@ echo do_shortcode($cat_data['bottomdescription']);
 ?>
 </div>
 `
+= How to display the bottom desciption of the tag listings =
+
+Add this to your template file:
+
+`
+<div class="bottagdesc">
+<?php
+if ( is_tag() ) {
+$tag_data = get_option("tag_$tag_id");
+if (isset($tag_data['bottomdescription'])){
+echo do_shortcode($tag_data['bottomdescription']);
+}
+                    } 
+
+?>
+</div>
+`
 
 = There's no styling for the bottom description  =
 
 Lots of themes will have different style for the category description style at the top. I don't know what your theme uses so the bottom description is enclosed in a div calls called botdesc
+
+Bottom desciption for tags has a div of bottagdesc
 
 You can either write up your own styles for the div class or find out what your theme is using to style the top category description and then simply add botdesc to include the bottom description.
 
@@ -143,6 +189,22 @@ echo '<img src="'.$cat_data['img'].'">';
 </div>
 `
 
+= How do I add the tag image to my template? =
+
+add this to your template:
+
+`
+<div class="tag_image">
+<?php
+
+$tag_data = get_option("tag_$tag_id");
+if (isset($tag_data['img'])){
+echo '<img src="'.$tag_data['img'].'">';
+}
+?>
+</div>
+`
+
 = The SEO parts do not work? =
 If you have an SEO plugin already installed then that may override the SEO aspects of this plugin. For All in One SEO pack you can disable the overwriting by putting in the name of the category in the exclude pages of the settings. Take care and read the All in One instructions on using this feature so you know what you are disabling.
 
@@ -153,6 +215,9 @@ If you have an SEO plugin already installed then that may override the SEO aspec
 
 
 == Changelog ==
+
+= 3.0 =
+* Tags now have bottom description, taq image and SEO meta abilities.
 
 = 2.4 =
 * Fixed issue of losing titles on single pages
@@ -205,6 +270,9 @@ If you have an SEO plugin already installed then that may override the SEO aspec
 
 
 == Upgrade Notice ==
+
+= 3.0 =
+* Tags now have bottom description, taq image and SEO meta abilities.
 
 = 2.4 =
 * Fixed issue of losing titles on single pages

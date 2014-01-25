@@ -3,7 +3,7 @@
 Plugin Name: CategoryTinymce
 Plugin URI: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Description: Adds a tinymce enable box to the category descriptions and taxonomy page.
-Version: 2.4
+Version: 3.0
 Author: Kevin Heath
 Author URI: http://ypraise.com
 License: GPL
@@ -248,9 +248,174 @@ function description2($tag) {
         </tr>
      
 </table>
-    <?php
+
+
+   <?php
 
 }
+
+//add extra fields to tag edit form hook
+add_action ( 'edit_tag_form_fields', 'extra_tag_fields');
+//add extra fields to category edit form callback function
+function extra_tag_fields( $tag ) {    //check for existing featured ID
+    $t_id = $tag->term_id;
+    $tag_meta = get_option( "tag_$t_id");
+?>
+<table class="form-table">
+<tr class="form-field">
+<th scope="row" valign="top"><label for="bottomdescription"><?php _e('Bottom Description'); ?></label></th>
+<td>
+<?php  
+	$settings = array('wpautop' => false, 'media_buttons' => true, 'quicktags' => true, 'textarea_rows' => '15', 'textarea_name' => 'tag_meta[bottomdescription]' );	
+		wp_editor(html_entity_decode($tag_meta['bottomdescription'] , ENT_QUOTES, 'UTF-8'), 'tag_meta[bottomdescription]', $settings); ?>	
+	<br />
+
+
+            <span class="description"><?php _e('Bottom description'); ?></span><div style="both:clear;"></div>
+        </td>
+</tr>
+
+<tr></tr>
+<tr class="form-field">
+<th scope="row" valign="top"><label for="tag_Image_url"><?php _e('Tag Image Url'); ?></label></th>
+<td>
+<input type="text" name="tag_meta[img]" id="tag_meta[img]" size="3" style="width:60%;" value="<?php echo $tag_meta['img'] ? $tag_meta['img'] : ''; ?>"><br />
+            <span class="description"><?php _e('Image for tag: use full url with http://'); ?></span>
+        </td>
+</tr>
+
+<tr></tr>
+<tr class="form-field">
+<th scope="row" valign="top"><label for="seo_met_title"><?php _e('SEO Meta Title'); ?></label></th>
+<td>
+<input type="text" name="tag_meta[seo_met_title]" id="tag_meta[seo_met_title]" size="3" style="width:60%;" value="<?php echo $tag_meta['seo_met_title'] ? $tag_meta['seo_met_title'] : ''; ?>"><br />
+            <span class="description"><?php _e('Add title for head section. recommended 60 characters max'); ?></span>
+        </td>
+</tr>
+
+<tr></tr>
+<tr class="form-field">
+<th scope="row" valign="top"><label for="seo_met_keywords"><?php _e('SEO Meta Keywords'); ?></label></th>
+<td>
+<input type="text" name="tag_meta[seo_met_keywords]" id="tag_meta[seo_met_keywords]" size="3" style="width:60%;" value="<?php echo $tag_meta['seo_met_keywords'] ? $tag_meta['seo_met_keywords'] : ''; ?>"><br />
+            <span class="description"><?php _e('Add keywords for head section. separate with commas'); ?></span>
+        </td>
+</tr>
+
+<tr></tr>
+<tr class="form-field">
+<th scope="row" valign="top"><label for="seo_met_description"><?php _e('SEO Meta Description'); ?></label></th>
+<td>
+<textarea rows="4" name="tag_meta[seo_met_description]" id="tag_meta[seo_met_description]" size="3" style="width:60%;" ><?php echo $tag_meta['seo_met_description'] ? $tag_meta['seo_met_description'] : ''; ?></textarea><br />
+            <span class="description"><?php _e('Add description for head section. recommended 140 characters max'); ?></span>
+        </td>
+</tr>
+
+
+</table>
+<?php
+}
+
+
+
+// save extra tag extra fields hook
+add_action ( 'edited_terms', 'save_extra_tag_fileds');
+   // save extra tag extra fields callback function
+function save_extra_tag_fileds( $term_id ) {
+    if ( isset( $_POST['tag_meta'] ) ) {
+        $t_id = $term_id;
+        $tag_meta = get_option( "tag_$t_id");
+        $tag_keys = array_keys ($_POST['tag_meta']);
+            foreach ($tag_keys as $key){
+            if (isset($_POST['tag_meta'][$key])){
+                $tag_meta[$key] =stripslashes_deep($_POST['tag_meta'][$key]);
+            }
+        }
+        //save the option array
+        update_option( "tag_$t_id", $tag_meta );
+    }
+}
+
+
+// lets add the tag meta to category head
+
+
+function add_tagseo_meta()
+ {  
+ 
+ if ( is_tag() ) {
+ 
+$tag_id = get_query_var('tag');
+
+$queried_object = get_queried_object();
+$term_id = $queried_object->term_id;
+
+$tag_data = get_option("tag_$term_id");
+
+    if (isset($tag_data['seo_met_description'])){     
+ 
+ ?>
+          <meta name="description" content="<?php echo $tag_data['seo_met_description'] ?>">
+       
+<?php
+ 
+}
+if (isset($tag_data['seo_met_keywords'])){           
+ 
+ ?>
+          <meta name="keywords" content="<?php echo $tag_data['seo_met_keywords']; ?>">
+       
+<?php
+	  }  
+
+
+
+
+
+	  }   }
+add_action('wp_head', 'add_tagseo_meta');
+
+function add_tag_title()
+ {  
+ 
+ if (is_tag()){
+$tag_id = get_query_var('tag');
+
+$queried_object = get_queried_object();
+$term_id = $queried_object->term_id;
+
+$tag_data = get_option("tag_$term_id");
+ 
+ if (isset($tag_data['seo_met_title'])){  
+
+ $title = $tag_data['seo_met_title']; 
+ 
+return $title;
+
+	  }
+	  else{
+	  $current_tag = single_tag_title("", false); 
+	$title = $current_tag .' | ' . get_bloginfo( "name", "display" ); 
+
+	  return $title;
+	  }
+}
+elseif (is_home() || is_front_page() )
+{
+$title = get_bloginfo( "name", "display" ) .' | ' . get_bloginfo( "description", "display" ); 
+
+	  return $title;
+
+}
+
+else {
+$title =  get_the_title() . ' | ' . get_bloginfo( "name", "display" );
+ return $title;
+}
+ 
+ }
+
+ add_filter( 'wp_title', 'add_tag_title', 1000 );
 
 // quick jquery to hide the default cat description box
 

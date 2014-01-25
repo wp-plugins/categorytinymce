@@ -3,9 +3,9 @@ Contributors: ypraise
 Donate link: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Tags: category description, wp_editor
 Requires at least: 3.3
-Tested up to: 3.8
-Stable tag: 3.0
-Version: 3.0
+Tested up to: 3.8.1
+Stable tag: 3.1
+Version: 3.1
 
 Provides the ability to add a fully functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
@@ -216,6 +216,9 @@ If you have an SEO plugin already installed then that may override the SEO aspec
 
 == Changelog ==
 
+= 3.1 =
+* Combined tag and category hooks to stop conflict on title re-writes
+
 = 3.0 =
 * Tags now have bottom description, taq image and SEO meta abilities.
 
@@ -270,6 +273,9 @@ If you have an SEO plugin already installed then that may override the SEO aspec
 
 
 == Upgrade Notice ==
+
+= 3.1 =
+* Combined tag and category hooks to stop conflict on title re-writes
 
 = 3.0 =
 * Tags now have bottom description, taq image and SEO meta abilities.

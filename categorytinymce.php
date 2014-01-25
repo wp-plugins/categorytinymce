@@ -3,7 +3,7 @@
 Plugin Name: CategoryTinymce
 Plugin URI: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Description: Adds a tinymce enable box to the category descriptions and taxonomy page.
-Version: 3.0
+Version: 3.1
 Author: Kevin Heath
 Author URI: http://ypraise.com
 License: GPL
@@ -150,78 +150,6 @@ function save_extra_category_fileds( $term_id ) {
 }
 
 
-// lets add the meta to category head
-
-
-function add_seo_meta()
- {  
- 
- if ( is_category() ) {
- 
-$cat_id = get_query_var('cat');
-$cat_data = get_option("category_$cat_id");
-if (isset($cat_data['seo_met_description'])){           
- 
- ?>
-          <meta name="description" content="<?php echo $cat_data['seo_met_description']; ?>">
-       
-<?php
-	  }  
-
-
-if (isset($cat_data['seo_met_keywords'])){           
- 
- ?>
-          <meta name="keywords" content="<?php echo $cat_data['seo_met_keywords']; ?>">
-       
-<?php
-	  }  
-
-
-
-
-
-	  }   }
-add_action('wp_head', 'add_seo_meta');
-
-
-function add_cat_title()
- {  
- 
- if (is_category()){
- $cat_id = get_query_var('cat');
-$cat_data = get_option("category_$cat_id");
- 
- if (isset($cat_data['seo_met_title'])){  
-
- $title = $cat_data['seo_met_title']; 
- 
-return $title;
-
-	  }
-	  else{
-	  $current_category = single_cat_title("", false); 
-	$title = $current_category .' | ' . get_bloginfo( "name", "display" ); 
-
-	  return $title;
-	  }
-}
-elseif (is_home() || is_front_page() )
-{
-$title = get_bloginfo( "name", "display" ) .' | ' . get_bloginfo( "description", "display" ); 
-
-	  return $title;
-
-}
-
-else {
-$title =  get_the_title() . ' | ' . get_bloginfo( "name", "display" );
- return $title;
-}
- 
- }
-
- add_filter( 'wp_title', 'add_cat_title', 1000 );
 
 
 
@@ -342,8 +270,35 @@ function save_extra_tag_fileds( $term_id ) {
 
 function add_tagseo_meta()
  {  
+  if ( is_category() ) {
  
- if ( is_tag() ) {
+$cat_id = get_query_var('cat');
+$queried_object = get_queried_object();
+$term_id = $queried_object->term_id;
+$cat_data = get_option("category_$term_id");
+if (isset($cat_data['seo_met_description'])){           
+ 
+ ?>
+          <meta name="description" content="<?php echo $cat_data['seo_met_description']; ?>">
+       
+<?php
+	  }  
+
+
+if (isset($cat_data['seo_met_keywords'])){           
+ 
+ ?>
+          <meta name="keywords" content="<?php echo $cat_data['seo_met_keywords']; ?>">
+       
+<?php
+	  }  
+
+
+
+
+
+	  }
+ elseif ( is_tag() ) {
  
 $tag_id = get_query_var('tag');
 
@@ -373,12 +328,31 @@ if (isset($tag_data['seo_met_keywords'])){
 
 
 	  }   }
+	
 add_action('wp_head', 'add_tagseo_meta');
+
 
 function add_tag_title()
  {  
+  if (is_category()){
+ $cat_id = get_query_var('cat');
+$cat_data = get_option("category_$cat_id");
  
- if (is_tag()){
+ if (isset($cat_data['seo_met_title'])){  
+
+ $title = $cat_data['seo_met_title']; 
+ 
+return $title;
+
+	  }
+	  else{
+	  $current_category = single_cat_title("", false); 
+	$title = $current_category .' | ' . get_bloginfo( "name", "display" ); 
+
+	  return $title;
+	  }
+}
+ elseif (is_tag()){
 $tag_id = get_query_var('tag');
 
 $queried_object = get_queried_object();

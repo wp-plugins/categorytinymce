@@ -4,8 +4,8 @@ Donate link: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Tags: category description, wp_editor
 Requires at least: 3.3
 Tested up to: 3.8.1
-Stable tag: 3.1
-Version: 3.1
+Stable tag: 3.2
+Version: 3.2
 
 Provides the ability to add a fully functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
@@ -208,6 +208,10 @@ echo '<img src="'.$tag_data['img'].'">';
 = The SEO parts do not work? =
 If you have an SEO plugin already installed then that may override the SEO aspects of this plugin. For All in One SEO pack you can disable the overwriting by putting in the name of the category in the exclude pages of the settings. Take care and read the All in One instructions on using this feature so you know what you are disabling.
 
+= I don't want SEO as I use my own plugin? =
+Go to the settings page and switch off the SEO. This will not remove the boxes in the admin pages but will stop the hook from firing and adding the meta tags to the head.
+
+
 == Screenshots ==
 
 1. A new tinymce enabled category description box is added to the category edit screen.
@@ -215,6 +219,9 @@ If you have an SEO plugin already installed then that may override the SEO aspec
 
 
 == Changelog ==
+
+= 3.2 = 
+* Added settings page so people who do not want SEO can switch it off.
 
 = 3.1 =
 * Combined tag and category hooks to stop conflict on title re-writes
@@ -273,6 +280,9 @@ If you have an SEO plugin already installed then that may override the SEO aspec
 
 
 == Upgrade Notice ==
+
+= 3.2 =
+* Added settings page so people who do ot want SEO can switch it off.
 
 = 3.1 =
 * Combined tag and category hooks to stop conflict on title re-writes

@@ -3,7 +3,7 @@
 Plugin Name: CategoryTinymce
 Plugin URI: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Description: Adds a tinymce enable box to the category descriptions and taxonomy page.
-Version: 3.1
+Version: 3.2
 Author: Kevin Heath
 Author URI: http://ypraise.com
 License: GPL
@@ -23,6 +23,59 @@ License: GPL
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+// lets set up the seetings page
+
+add_action( 'admin_menu', 'catMCE_menu' );
+
+
+function CatMCE_menu() {
+	add_options_page( 'CatMCE settings', 'CategoryTinyMCE', 'manage_options', 'catMCE', 'catMCE_options' );
+}
+
+add_action ('admin_init', 'catMCE_register');
+
+function catMCE_register(){
+register_setting('catMCE_options', 'catMCE_seo');
+}
+
+
+function catMCE_options() {
+	if ( !current_user_can( 'manage_options' ) )  {
+		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+	}
+	?>
+	<div class="wrap">
+	<h2>CategoryTinyMCE SEO Settings</h2>
+	<div id="donate_container">
+      Help keep this plugin in development and improved by using my Amazon links to make your purchases. Your commission can help support all my free Wordpress plugins. <a href="http://ypraise.com/2013/wordpress/plugins/wordpress-2/suport-my-free-wordpress-plugins/">My Amazon page</a> <br />
+    </div>
+	
+	<p><form method="post" action="options.php">	</p>
+	<p>SEO Settings for CategoryTinyMCE:</p>
+	
+	<?php
+	
+	settings_fields( 'catMCE_options' );
+	
+?>
+<p>Choose SEO:  
+
+<input type="checkbox" name="catMCE_seo" value="1" <?php checked( '1', get_option( 'catMCE_seo' ) ); ?> />
+							</p>
+
+ <?php
+
+
+	
+ submit_button();
+echo '</form>';
+
+	
+	echo '</div>';
+}
+
+
 // lets remove the html filtering
    
 	remove_filter( 'pre_term_description', 'wp_filter_kses' );
@@ -267,7 +320,8 @@ function save_extra_tag_fileds( $term_id ) {
 
 // lets add the tag meta to category head
 
-
+$catseo = get_option('catMCE_seo');
+if ($catseo == "1") {
 function add_tagseo_meta()
  {  
   if ( is_category() ) {
@@ -390,7 +444,7 @@ $title =  get_the_title() . ' | ' . get_bloginfo( "name", "display" );
  }
 
  add_filter( 'wp_title', 'add_tag_title', 1000 );
-
+}
 // quick jquery to hide the default cat description box
 
 function hide_category_description() {

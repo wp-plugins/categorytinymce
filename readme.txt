@@ -1,11 +1,11 @@
 === CategoryTinymce ===
 Contributors: ypraise
-Donate link: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
+Donate link: http://ypraise.com/2013/wordpress/wordpress-2/suport-my-free-wordpress-plugins/
 Tags: category description, wp_editor
 Requires at least: 3.3
 Tested up to: 3.8.1
-Stable tag: 3.2
-Version: 3.2
+Stable tag: 3.3
+Version: 3.3
 
 Provides the ability to add a fully functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
@@ -80,6 +80,8 @@ echo '<img src="'.$tag_data['img'].'">';
 ?>
 </div>
 `
+
+
 
 
 == Installation ==
@@ -160,6 +162,35 @@ echo do_shortcode($tag_data['bottomdescription']);
 ?>
 </div>
 `
+= How do I use this in Woocommerce? =
+
+Woocommerce integration:
+The top category description is called as normal. To add the bottom description to a product archive add the following to the archive-product.php file. I would strongly recommend you add the file in the child folder in your theme file rather than directly changing the file in the woocommerce plugin file.
+Read how to do this in woocommerce if you don't already know.
+I add the code after the 	
+
+`do_action( 'woocommerce_after_shop_loop' );
+			?>`
+The code to call bottom description in woocommerce: 
+
+`
+	<div class="bottagdesc">
+<?php
+if ( is_product_category() ) {
+global $wp_query;
+        $q_obj = $wp_query->get_queried_object();
+        $cat_id = $q_obj->term_id;
+$cat_data = get_option("category_$cat_id");
+if (isset($cat_data['bottomdescription'])){
+echo do_shortcode($cat_data['bottomdescription']);
+}
+         } 
+
+
+?>
+</div>	
+`
+
 
 = There's no styling for the bottom description  =
 
@@ -219,6 +250,9 @@ Go to the settings page and switch off the SEO. This will not remove the boxes i
 
 
 == Changelog ==
+
+= 3.3 =
+* Change read me to show how to add bottom description to a woocommerce product category.
 
 = 3.2 = 
 * Added settings page so people who do not want SEO can switch it off.
@@ -280,6 +314,9 @@ Go to the settings page and switch off the SEO. This will not remove the boxes i
 
 
 == Upgrade Notice ==
+
+= 3.3 =
+* Change read me to show how to add bottom description to a woocommerce product category.
 
 = 3.2 =
 * Added settings page so people who do ot want SEO can switch it off.

@@ -3,9 +3,9 @@ Contributors: ypraise
 Donate link: http://ypraise.com/2013/wordpress/wordpress-2/suport-my-free-wordpress-plugins/
 Tags: category description, wp_editor
 Requires at least: 3.3
-Tested up to: 3.8.1
-Stable tag: 3.3
-Version: 3.3
+Tested up to: 3.8.2
+Stable tag: 3.4
+Version: 3.4
 
 Provides the ability to add a fully functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
@@ -166,7 +166,7 @@ echo do_shortcode($tag_data['bottomdescription']);
 
 Woocommerce integration:
 The top category description is called as normal. To add the bottom description to a product archive add the following to the archive-product.php file. I would strongly recommend you add the file in the child folder in your theme file rather than directly changing the file in the woocommerce plugin file.
-Read how to do this in woocommerce if you don't already know.
+Read how to do this in woocommerce if you don't already know. Also remember that if you use a none woocommerce theme and are using the woocommerce.php option in your theme folder then this is the file you need to edit as product-archive.php file does not work.
 I add the code after the 	
 
 `do_action( 'woocommerce_after_shop_loop' );
@@ -174,18 +174,19 @@ I add the code after the
 The code to call bottom description in woocommerce: 
 
 `
-	<div class="bottagdesc">
+				<div class="bottagdesc">
 <?php
-if ( is_product_category() ) {
+if ( is_product_category()) {
 global $wp_query;
         $q_obj = $wp_query->get_queried_object();
         $cat_id = $q_obj->term_id;
-$cat_data = get_option("category_$cat_id");
-if (isset($cat_data['bottomdescription'])){
-echo do_shortcode($cat_data['bottomdescription']);
-}
-         } 
 
+
+$tag_data = get_option("tag_$cat_id");
+if (isset($tag_data['bottomdescription'])){
+echo do_shortcode($tag_data['bottomdescription']);
+         } 
+}
 
 ?>
 </div>	
@@ -251,6 +252,9 @@ Go to the settings page and switch off the SEO. This will not remove the boxes i
 
 == Changelog ==
 
+= 3.4 =
+* Change readme file to up date FAQ for woocommerce - I'd been calling the wrong id.
+
 = 3.3 =
 * Change read me to show how to add bottom description to a woocommerce product category.
 
@@ -314,6 +318,9 @@ Go to the settings page and switch off the SEO. This will not remove the boxes i
 
 
 == Upgrade Notice ==
+
+= 3.4 =
+* Change readme file to up date FAQ for woocommerce - I'd been calling the wrong id.
 
 = 3.3 =
 * Change read me to show how to add bottom description to a woocommerce product category.

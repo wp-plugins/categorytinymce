@@ -4,12 +4,15 @@ Donate link: http://ypraise.com/2013/wordpress/wordpress-2/suport-my-free-wordpr
 Tags: category description, wp_editor
 Requires at least: 3.3
 Tested up to: 3.8.2
-Stable tag: 3.4
-Version: 3.4
+Stable tag: 3.5
+Version: 3.5
 
 Provides the ability to add a fully functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
 == Description ==
+
+Support for this plugin has now ended. When you update to Wordpress 3.9 you wil lose the editor for the bottom description. I have no time or inclination to continue updated this plugin due to the number of Wordpress updates there are each year.
+
 
 This plugin needs at least Wordpress 3.3 to work as it uses the new wp_editor call introduced in WP 3.3.
 
@@ -252,6 +255,9 @@ Go to the settings page and switch off the SEO. This will not remove the boxes i
 
 == Changelog ==
 
+= 3.5 = 
+* Notification of ending of support for this plugin due to latest update of Wordpress to 3.9
+
 = 3.4 =
 * Change readme file to up date FAQ for woocommerce - I'd been calling the wrong id.
 
@@ -318,6 +324,9 @@ Go to the settings page and switch off the SEO. This will not remove the boxes i
 
 
 == Upgrade Notice ==
+
+= 3.5 = 
+* Notification of ending of support for this plugin due to latest update of Wordpress to 3.9
 
 = 3.4 =
 * Change readme file to up date FAQ for woocommerce - I'd been calling the wrong id.

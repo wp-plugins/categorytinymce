@@ -3,7 +3,7 @@
 Plugin Name: CategoryTinymce
 Plugin URI: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
 Description: Adds a tinymce enable box to the category descriptions and taxonomy page.
-Version: 3.4
+Version: 3.5
 Author: Kevin Heath
 Author URI: http://ypraise.com
 License: GPL

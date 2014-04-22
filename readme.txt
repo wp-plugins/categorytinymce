@@ -1,17 +1,19 @@
 === CategoryTinymce ===
 Contributors: ypraise
-Donate link: http://ypraise.com/2013/wordpress/wordpress-2/suport-my-free-wordpress-plugins/
+Donate link: http://wp.ypraise.com/
 Tags: category description, wp_editor
 Requires at least: 3.3
 Tested up to: 3.8.2
-Stable tag: 3.5
-Version: 3.5
+Stable tag: 3.5.1
+Version: 3.5.1
 
 Provides the ability to add a fully functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
 == Description ==
 
-Support for this plugin has now ended. When you update to Wordpress 3.9 you wil lose the editor for the bottom description. I have no time or inclination to continue updated this plugin due to the number of Wordpress updates there are each year.
+Support for this plugin has now ended. When you update to Wordpress 3.9 you will lose the editor for the bottom description. I have no time or inclination to continue updated this plugin due to the number of Wordpress updates there are each year.
+
+The latest fully supported version of this plugin - compatible with Wordpress 3.9 - is available from http://wp.ypraise.com/
 
 
 This plugin needs at least Wordpress 3.3 to work as it uses the new wp_editor call introduced in WP 3.3.
@@ -255,6 +257,9 @@ Go to the settings page and switch off the SEO. This will not remove the boxes i
 
 == Changelog ==
 
+= 3.5.1 =
+* Notification of CategoryTinymce 4.0 at http://wp.ypraise.com/
+
 = 3.5 = 
 * Notification of ending of support for this plugin due to latest update of Wordpress to 3.9
 
@@ -324,6 +329,9 @@ Go to the settings page and switch off the SEO. This will not remove the boxes i
 
 
 == Upgrade Notice ==
+
+= 3.5.1 =
+* Notification of CategoryTinymce 4.0 at http://wp.ypraise.com/
 
 = 3.5 = 
 * Notification of ending of support for this plugin due to latest update of Wordpress to 3.9

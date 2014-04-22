@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: CategoryTinymce
-Plugin URI: http://ypraise.com/2012/01/wordpress-plugin-categorytinymce/
+Plugin URI: http://wp.ypraise.com/
 Description: Adds a tinymce enable box to the category descriptions and taxonomy page.
-Version: 3.5
+Version: 3.5.1
 Author: Kevin Heath
-Author URI: http://ypraise.com
+Author URI: http://wp.ypraise.com/
 License: GPL
 */
 /*  Copyright 2013  Kevin Heath  (email : kevin@ypraise.com)
@@ -48,7 +48,7 @@ function catMCE_options() {
 	<div class="wrap">
 	<h2>CategoryTinyMCE SEO Settings</h2>
 	<div id="donate_container">
-      Help keep this plugin in development and improved by using my Amazon links to make your purchases. Your commission can help support all my free Wordpress plugins. <a href="http://ypraise.com/2013/wordpress/plugins/wordpress-2/suport-my-free-wordpress-plugins/">My Amazon page</a> <br />
+     The latest fully maintained version compatible with WP3.9 is available from http://wp.ypraise.com/
     </div>
 	
 	<p><form method="post" action="options.php">	</p>

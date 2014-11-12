@@ -1,92 +1,25 @@
 === CategoryTinymce ===
 Contributors: ypraise
-Donate link: http://wp.ypraise.com/
-Tags: category description, wp_editor
+Donate link: http://wp.ypraise.com/2014/boost-your-categories-with-categorytinymce-4-0/
+Tags: category description, wp_editor, tag description
 Requires at least: 3.3
-Tested up to: 3.8.2
-Stable tag: 3.5.1
-Version: 3.5.1
+Tested up to: 4.0
+Stable tag: 3.6
+Version: 3.6
 
 Provides the ability to add a fully functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
 == Description ==
 
-Support for this plugin has now ended. When you update to Wordpress 3.9 you will lose the editor for the bottom description. I have no time or inclination to continue updated this plugin due to the number of Wordpress updates there are each year.
+Because the bottom description no longer works with Wordpress 4.0 - the new Category Tinymce 4.0 version available at < a href="http://wp.ypraise.com/2014/boost-your-categories-with-categorytinymce-4-0/">wp.ypraise.com does work </a> - I've taken this plugin back to it's basics.
 
-The latest fully supported version of this plugin - compatible with Wordpress 3.9 - is available from http://wp.ypraise.com/
+The default Wordpress category and tag desciption still works with this plugin in wordpress 4.0 so I have removed  bottom desciption. I've also removed the filter that removed the description from the category listing and tag listing screens. You can remove them using your own dashboard screen options by unticking the description box.
 
+I've changed the hiding of the old boxes for tags and categories from jquery to css to reduce chances of conflict with other plugins and themes.
 
-This plugin needs at least Wordpress 3.3 to work as it uses the new wp_editor call introduced in WP 3.3.
+Do not upgrade to this version if you are still using Wordpress 3.9 and using bottom descriptions - you will lose those.
 
-The CategoryTinymce plugin replaces the current category description box with one that has a fully active tinymce editor. 
-
-By adding html formatted text in the category description you can spoil the look of the category admin page so this plugin also removes the description column from the admin page to keep it looking nice and manageable.
-
-The plugin has now been extended to include the tag description and admin screens.
-
-There are no setting to configure just upload and  activate.
-
-You can now add a second category description at the bottom of the category listing. You need to add the following code to the category template file to get the description to display:
-`
-<div class="botdesc">
-<?php
-if ( is_category() ) {
- 
-$cat_id = get_query_var('cat');
-$cat_data = get_option("category_$cat_id");
-if (isset($cat_data['bottomdescription'])){
-echo do_shortcode($cat_data['bottomdescription']);
-}
-                    } 
-
-?>
-</div>
-`
-
-you can also set a category image and this is called in your template by:
-`
-<div class="category_image">
-<?php
-$cat_id = get_query_var('cat');
-$cat_data = get_option("category_$cat_id");
-if (isset($cat_data['img'])){
-echo '<img src="'.$cat_data['img'].'">';
-}
-?>
-</div>
-`
-The new options are based on code blogged by Ohad Raz at http://en.bainternet.info/
-
-You can add a bottom description to your tag pages using the following code in your template:
-
-`
-<div class="bottagdesc">
-<?php
-if ( is_tag() ) {
-$tag_data = get_option("tag_$tag_id");
-if (isset($tag_data['bottomdescription'])){
-echo do_shortcode($tag_data['bottomdescription']);
-}
-                    } 
-
-?>
-</div>
-`
-
-You can call the tag image in your template by using:
-
-`
-<div class="tag_image">
-<?php
-$tag_data = get_option("tag_$tag_id");
-if (isset($tag_data['img'])){
-echo '<img src="'.$tag_data['img'].'">';
-}
-?>
-</div>
-`
-
-
+<strong>There is no support for this version of Category Tinymce</stong>. I've updated it because I know some people are using it  as the top description works. It seems pointless have you category edit screen contain forms that you can not use.
 
 
 == Installation ==
@@ -132,122 +65,6 @@ if (is_tag() && $paged < 2) {
 `
 just before the get template part.
 
-= How to display the description at the bottom of the category listings  =
-
-Add this to your template
-`
-<div class="botdesc">
-<?php
-if ( is_category() ) {
- 
-$cat_id = get_query_var('cat');
-$cat_data = get_option("category_$cat_id");
-if (isset($cat_data['bottomdescription'])){
-echo do_shortcode($cat_data['bottomdescription']);
-}
-                    } 
-
-?>
-</div>
-`
-= How to display the bottom desciption of the tag listings =
-
-Add this to your template file:
-
-`
-<div class="bottagdesc">
-<?php
-if ( is_tag() ) {
-$tag_data = get_option("tag_$tag_id");
-if (isset($tag_data['bottomdescription'])){
-echo do_shortcode($tag_data['bottomdescription']);
-}
-                    } 
-
-?>
-</div>
-`
-= How do I use this in Woocommerce? =
-
-Woocommerce integration:
-The top category description is called as normal. To add the bottom description to a product archive add the following to the archive-product.php file. I would strongly recommend you add the file in the child folder in your theme file rather than directly changing the file in the woocommerce plugin file.
-Read how to do this in woocommerce if you don't already know. Also remember that if you use a none woocommerce theme and are using the woocommerce.php option in your theme folder then this is the file you need to edit as product-archive.php file does not work.
-I add the code after the 	
-
-`do_action( 'woocommerce_after_shop_loop' );
-			?>`
-The code to call bottom description in woocommerce: 
-
-`
-				<div class="bottagdesc">
-<?php
-if ( is_product_category()) {
-global $wp_query;
-        $q_obj = $wp_query->get_queried_object();
-        $cat_id = $q_obj->term_id;
-
-
-$tag_data = get_option("tag_$cat_id");
-if (isset($tag_data['bottomdescription'])){
-echo do_shortcode($tag_data['bottomdescription']);
-         } 
-}
-
-?>
-</div>	
-`
-
-
-= There's no styling for the bottom description  =
-
-Lots of themes will have different style for the category description style at the top. I don't know what your theme uses so the bottom description is enclosed in a div calls called botdesc
-
-Bottom desciption for tags has a div of bottagdesc
-
-You can either write up your own styles for the div class or find out what your theme is using to style the top category description and then simply add botdesc to include the bottom description.
-
-eg if your theme uses #header for the top description you add botdesc to the style.css as:
-
-#header, botdesc h1{blah blah blah}
-
-
-= How do I add the category image to my template? =
-
-add this to your theme file
-`
-<div class="category_image">
-<?php
-$cat_id = get_query_var('cat');
-$cat_data = get_option("category_$cat_id");
-if (isset($cat_data['img'])){
-echo '<img src="'.$cat_data['img'].'">';
-}
-?>
-</div>
-`
-
-= How do I add the tag image to my template? =
-
-add this to your template:
-
-`
-<div class="tag_image">
-<?php
-
-$tag_data = get_option("tag_$tag_id");
-if (isset($tag_data['img'])){
-echo '<img src="'.$tag_data['img'].'">';
-}
-?>
-</div>
-`
-
-= The SEO parts do not work? =
-If you have an SEO plugin already installed then that may override the SEO aspects of this plugin. For All in One SEO pack you can disable the overwriting by putting in the name of the category in the exclude pages of the settings. Take care and read the All in One instructions on using this feature so you know what you are disabling.
-
-= I don't want SEO as I use my own plugin? =
-Go to the settings page and switch off the SEO. This will not remove the boxes in the admin pages but will stop the hook from firing and adding the meta tags to the head.
-
 
 == Screenshots ==
 
@@ -256,6 +73,11 @@ Go to the settings page and switch off the SEO. This will not remove the boxes i
 
 
 == Changelog ==
+
+= 3.6 =
+* Removed bottom description from plugin as these do not work with Wordpress 4.0 and later. The default Wordpress categroy and tag descriptions still work though. 
+* Remvoed filter that hide the description in category and tag listing pages - use your own screen display options on the page.
+* Hide the old description boxes with css from jquery.
 
 = 3.5.1 =
 * Notification of CategoryTinymce 4.0 at http://wp.ypraise.com/
@@ -329,6 +151,9 @@ Go to the settings page and switch off the SEO. This will not remove the boxes i
 
 
 == Upgrade Notice ==
+
+= 3.6 =
+* Removed bottom description and SEO as these are not working in Wordpress 4.0 with the free version of CategoryTinymce.
 
 = 3.5.1 =
 * Notification of CategoryTinymce 4.0 at http://wp.ypraise.com/

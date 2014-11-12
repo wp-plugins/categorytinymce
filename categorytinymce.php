@@ -3,7 +3,7 @@
 Plugin Name: CategoryTinymce
 Plugin URI: http://wp.ypraise.com/
 Description: Adds a tinymce enable box to the category descriptions and taxonomy page.
-Version: 3.5.1
+Version: 3.6
 Author: Kevin Heath
 Author URI: http://wp.ypraise.com/
 License: GPL
@@ -89,7 +89,9 @@ add_action( 'admin_print_styles', 'categorytinymce_admin_head' );
 function categorytinymce_admin_head() { ?>
 <style type="text/css">
   .quicktags-toolbar input{float:left !important; width:auto !important;}
+  [for="description"], textarea#description  {display:none!important;}
   </style>
+  
 <?php	} 
 
 	
@@ -128,19 +130,6 @@ function extra_category_fields( $tag ) {    //check for existing featured ID
     $cat_meta = get_option( "category_$t_id");
 ?>
 <table class="form-table">
-<tr class="form-field">
-<th scope="row" valign="top"><label for="bottomdescription"><?php _e('Bottom Description'); ?></label></th>
-<td>
-<?php  
-	$settings = array('wpautop' => false, 'media_buttons' => true, 'quicktags' => true, 'textarea_rows' => '15', 'textarea_name' => 'Cat_meta[bottomdescription]' );	
-		wp_editor(html_entity_decode($cat_meta['bottomdescription'] , ENT_QUOTES, 'UTF-8'), 'Cat_meta[bottomdescription]', $settings); ?>	
-	<br />
-
-
-            <span class="description"><?php _e('Bottom description'); ?></span><div style="both:clear;"></div>
-        </td>
-</tr>
-
 <tr></tr>
 <tr class="form-field">
 <th scope="row" valign="top"><label for="cat_Image_url"><?php _e('Category Image Url'); ?></label></th>
@@ -151,6 +140,8 @@ function extra_category_fields( $tag ) {    //check for existing featured ID
 </tr>
 
 <tr></tr>
+<?php $catseo = get_option('catMCE_seo');
+if ($catseo == "1") { ?>
 <tr class="form-field">
 <th scope="row" valign="top"><label for="seo_met_title"><?php _e('SEO Meta Title'); ?></label></th>
 <td>
@@ -176,7 +167,7 @@ function extra_category_fields( $tag ) {    //check for existing featured ID
             <span class="description"><?php _e('Add description for head section. recommended 140 characters max'); ?></span>
         </td>
 </tr>
-
+	<?php } ?>
 
 </table>
 <?php
@@ -244,20 +235,6 @@ function extra_tag_fields( $tag ) {    //check for existing featured ID
 ?>
 <table class="form-table">
 <tr class="form-field">
-<th scope="row" valign="top"><label for="bottomdescription"><?php _e('Bottom Description'); ?></label></th>
-<td>
-<?php  
-	$settings = array('wpautop' => false, 'media_buttons' => true, 'quicktags' => true, 'textarea_rows' => '15', 'textarea_name' => 'tag_meta[bottomdescription]' );	
-		wp_editor(html_entity_decode($tag_meta['bottomdescription'] , ENT_QUOTES, 'UTF-8'), 'tag_meta[bottomdescription]', $settings); ?>	
-	<br />
-
-
-            <span class="description"><?php _e('Bottom description'); ?></span><div style="both:clear;"></div>
-        </td>
-</tr>
-
-<tr></tr>
-<tr class="form-field">
 <th scope="row" valign="top"><label for="tag_Image_url"><?php _e('Tag Image Url'); ?></label></th>
 <td>
 <input type="text" name="tag_meta[img]" id="tag_meta[img]" size="3" style="width:60%;" value="<?php echo $tag_meta['img'] ? $tag_meta['img'] : ''; ?>"><br />
@@ -266,6 +243,8 @@ function extra_tag_fields( $tag ) {    //check for existing featured ID
 </tr>
 
 <tr></tr>
+<?php $catseo = get_option('catMCE_seo');
+if ($catseo == "1") { ?>
 <tr class="form-field">
 <th scope="row" valign="top"><label for="seo_met_title"><?php _e('SEO Meta Title'); ?></label></th>
 <td>
@@ -291,7 +270,7 @@ function extra_tag_fields( $tag ) {    //check for existing featured ID
             <span class="description"><?php _e('Add description for head section. recommended 140 characters max'); ?></span>
         </td>
 </tr>
-
+	<?php } ?>
 
 </table>
 <?php
@@ -445,67 +424,10 @@ $title =  get_the_title() . ' | ' . get_bloginfo( "name", "display" );
 
  add_filter( 'wp_title', 'add_tag_title', 1000 );
 }
-// quick jquery to hide the default cat description box
-
-function hide_category_description() {
-      global $current_screen;
-if ( $current_screen->id == 'edit-category' ) { 
-?>
-<script type="text/javascript">
-jQuery(function($) {
- $('select#description').closest('tr.form-field').hide(); $('textarea#description, textarea#tag-description').closest('tr.form-field').hide(); 
- }); 
- </script> <?php
- } 
-	  } 
+ 
 	  
-	  // quick jquery to hide the default tag description box
-
-function hide_tag_description() {
-      global $current_screen;
-if ( $current_screen->id == 'edit-'.$current_screen->taxonomy ) {
-?>
-<script type="text/javascript">
-jQuery(function($) {
- $('select#description').closest('tr.form-field').hide(); $('textarea#description, textarea#tag-description').closest('tr.form-field').hide(); 
- }); 
- </script> <?php
- } 
-	  } 
-	  
-// lets hide the cat description from the category admin page
-
-add_action('admin_head', 'hide_category_description'); 
-add_action('admin_head', 'hide_tag_description'); 
 
 
-
-
-function manage_my_category_columns($columns)
-{
- // only edit the columns on the current taxonomy
- if ( !isset($_GET['taxonomy']) || $_GET['taxonomy'] != 'category' )
- return $columns;
- 
- // unset the description columns
- if ( $posts = $columns['description'] ){ unset($columns['description']); }
- 
- return $columns;
-}
-add_filter('manage_edit-category_columns','manage_my_category_columns');
-
-function manage_my_tag_columns($columns)
-{
- // only edit the columns on the current taxonomy
- if ( !isset($_GET['taxonomy']) || $_GET['taxonomy'] != 'post_tag' )
- return $columns;
- 
- // unset the description columns
- if ( $posts = $columns['description'] ){ unset($columns['description']); }
- 
- return $columns;
-}
-add_filter('manage_edit-post_tag_columns','manage_my_tag_columns');
 
 add_filter('term_description', 'do_shortcode');
 // when a category is removed delete the new box

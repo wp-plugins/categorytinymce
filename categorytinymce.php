@@ -3,7 +3,7 @@
 Plugin Name: CategoryTinymce
 Plugin URI: http://wp.ypraise.com/
 Description: Adds a tinymce enable box to the category descriptions and taxonomy page.
-Version: 3.6
+Version: 3.6.1
 Author: Kevin Heath
 Author URI: http://wp.ypraise.com/
 License: GPL
@@ -48,7 +48,7 @@ function catMCE_options() {
 	<div class="wrap">
 	<h2>CategoryTinyMCE SEO Settings</h2>
 	<div id="donate_container">
-     The latest fully maintained version compatible with WP3.9 is available from http://wp.ypraise.com/
+     The latest fully maintained version (Categorytinymce 4.x) which includes the bottom listing description box can be found at http://wp.ypraise.com/. Adding a bottom description for your categories and tags can help you with your user experience and SEO.
     </div>
 	
 	<p><form method="post" action="options.php">	</p>
@@ -86,13 +86,17 @@ echo '</form>';
 add_action( 'admin_print_styles', 'categorytinymce_admin_head' );
 
 
-function categorytinymce_admin_head() { ?>
+function categorytinymce_admin_head() { 
+      global $current_screen;
+if ( $current_screen->id == 'edit-category' OR 'edit-tag' ) { 
+
+?>
 <style type="text/css">
   .quicktags-toolbar input{float:left !important; width:auto !important;}
   [for="description"], textarea#description  {display:none!important;}
   </style>
   
-<?php	} 
+<?php	} }
 
 	
 // lets add our new cat description box	

@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: CategoryTinymce
-Plugin URI: http://wp.ypraise.com/
+Plugin URI: http://wp.ypraise.com/2014/boost-your-categories-with-categorytinymce-4-0/
 Description: Adds a tinymce enable box to the category descriptions and taxonomy page.
-Version: 3.6.1
+Version: 3.6.2
 Author: Kevin Heath
 Author URI: http://wp.ypraise.com/
 License: GPL
@@ -23,6 +23,10 @@ License: GPL
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 // lets set up the seetings page
 

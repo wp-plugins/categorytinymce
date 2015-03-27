@@ -4,8 +4,8 @@ Donate link: http://wp.ypraise.com/2014/boost-your-categories-with-categorytinym
 Tags: category description, wp_editor, tag description
 Requires at least: 3.3
 Tested up to: 4.1
-Stable tag: 3.6.1
-Version: 3.6.1
+Stable tag: 3.6.2
+Version: 3.6.2
 
 Provides the ability to add a fully functional tinymce editor to the category and tag editor to style up the introductory information for category archives.
 
@@ -73,6 +73,10 @@ just before the get template part.
 
 
 == Changelog ==
+
+= 3.6.2 =
+* security enhancement
+* notification of CategoryTinymce 5.0 at http://wp.ypraise.com/2014/boost-your-categories-with-categorytinymce-4-0/
 
 =3.6.1=
 * the css for removing the old description field was removing all fields in edit screens called description (eg user profile edit) I've added a page check to ensure the css is only called for category edit pages.
@@ -154,6 +158,10 @@ just before the get template part.
 
 
 == Upgrade Notice ==
+
+= 3.6.2 =
+* security enhancement
+* notification of CategoryTinymce 5.0 at http://wp.ypraise.com/2014/boost-your-categories-with-categorytinymce-4-0/
 
 =3.6.1=
 * the css for removing the old description field was removing all fields in edit screens called description (eg user profile edit) I've added a page check to ensure the css is only called for category edit pages.
